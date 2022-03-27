@@ -59,7 +59,20 @@ double DriverStim300::getAverageTemp() const noexcept {
 
   return count != 0 ? sum / count : std::numeric_limits<double>::quiet_NaN();
 }
+Eigen::Vector3d DriverStim300::getAccData()
+{
+    return Eigen::Vector3d (this->sensor_data_.acc[0], this->sensor_data_.acc[1], this->sensor_data_.acc[2]);
+}
 
+Eigen::Vector3d DriverStim300::getGyroData()
+{
+    return Eigen::Vector3d (this->sensor_data_.gyro[0], this->sensor_data_.gyro[1], this->sensor_data_.gyro[2]);
+}
+
+Eigen::Vector3d DriverStim300::getInclData()
+{
+    return Eigen::Vector3d (this->sensor_data_.incl[0], this->sensor_data_.incl[1], this->sensor_data_.incl[2]);
+}
 Stim300Status DriverStim300::readDataStream() {
   // Read stream to identify the start of a datagram.
   // If no datagram is identified after 100 bytes, ask for a config datagram.
